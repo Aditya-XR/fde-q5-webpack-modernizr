@@ -1,0 +1,67 @@
+/* Theme flatpickr's month picker with the app's colours (light and dark).
+   Part of the lazy "month-fallback" chunk. */
+
+.flatpickr-calendar {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 30px rgb(0 0 0 / 0.16);
+  font-family: inherit;
+}
+
+.flatpickr-calendar.arrowTop::after {
+  border-bottom-color: var(--surface);
+}
+
+.flatpickr-calendar.arrowBottom::after {
+  border-top-color: var(--surface);
+}
+
+.flatpickr-calendar.arrowTop::before {
+  border-bottom-color: var(--border);
+}
+
+.flatpickr-months .flatpickr-month,
+.flatpickr-current-month input.cur-year {
+  color: var(--ink);
+  fill: var(--ink);
+}
+
+.flatpickr-months .flatpickr-prev-month,
+.flatpickr-months .flatpickr-next-month {
+  color: var(--ink-2);
+  fill: var(--ink-2);
+}
+
+.flatpickr-months .flatpickr-prev-month:hover svg,
+.flatpickr-months .flatpickr-next-month:hover svg {
+  fill: var(--accent);
+}
+
+.flatpickr-monthSelect-month {
+  color: var(--ink);
+  border-radius: 8px;
+}
+
+.flatpickr-monthSelect-month:hover,
+.flatpickr-monthSelect-month:focus {
+  background: var(--surface-2);
+  border-color: var(--surface-2);
+}
+
+.flatpickr-monthSelect-month.today {
+  border-color: var(--axis);
+}
+
+.flatpickr-monthSelect-month.today:hover,
+.flatpickr-monthSelect-month.today:focus {
+  background: var(--surface-2);
+  border-color: var(--axis);
+  color: var(--ink);
+}
+
+.flatpickr-monthSelect-month.selected,
+.flatpickr-monthSelect-month.selected:hover {
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
+  color: #fff;
+}

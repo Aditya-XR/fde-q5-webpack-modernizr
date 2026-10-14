@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Track monthly expenses. Built with Webpack code splitting and Modernizr feature detection.">
+  <title>Monthly Expense Tracker</title>
+
+  <!-- Custom Modernizr build, inlined by webpack.config.js. It runs before first paint and
+       sets classes such as "inputtypes-month" / "no-inputtypes-month" on <html>. -->
+  <script><%= modernizr %></script>
+  <script>
+    // Demo switch: ?force-fallback makes a browser that supports <input type="month">
+    // take exactly the same code path as a browser that doesn't.
+    (function () {
+      if (!new URLSearchParams(location.search).has('force-fallback')) return;
+      Modernizr.inputtypes.month = false;
+      var root = document.documentElement;
+      root.classList.remove('inputtypes-month');
+      root.classList.add('no-inputtypes-month', 'forced-fallback');
+    })();
+  </script>
+</head>
+<body>
+  <noscript><p class="noscript">This app needs JavaScript to run.</p></noscript>
+
+  <header class="app-header">
+    <div class="brand">
+      <span class="brand-logo" aria-hidden="true"></span>
+      <div>
+        <h1>Monthly Expense Tracker</h1>
+        <p class="tagline">Front End Design, Q5: Webpack and Modernizr</p>
+      </div>
+    </div>
+    <div id="feature-status" class="feature-status" role="status" data-tone="pending">
+      <span class="status-icon" aria-hidden="true">…</span>
+      <span class="status-text">Checking browser support…</span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <div class="column">
+      <section class="card" aria-labelledby="month-heading">
+        <h2 id="month-heading">Month</h2>
+        <div class="field">
+          <label for="month">Show expenses for</label>
+          <input id="month" name="month" type="month" required>
+        </div>
+        <p class="hint fallback-only">
+          This browser has no native month picker, so a fallback picker was loaded.
+        </p>
+      </section>
+
+      <section class="card" aria-labelledby="form-heading">
+        <h2 id="form-heading">Add an expense</h2>
+        <p class="card-sub">Adding to <strong data-form-month>this month</strong></p>
+        <form id="expense-form" class="expense-form" novalidate>
+          <div class="field">
+            <label for="expense-title">What was it for?</label>
+            <input id="expense-title" name="title" type="text" maxlength="60" required
+                   autocomplete="off" placeholder="e.g. Groceries">
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="expense-amount">Amount (₹)</label>
+              <input id="expense-amount" name="amount" type="number" min="0.01" step="0.01"
+                     inputmode="decimal" required placeholder="0.00">
+            </div>
+            <div class="field">
+              <label for="expense-category">Category</label>
+              <select id="expense-category" name="category"></select>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Add expense</button>
+        </form>
+      </section>
+    </div>
+
+    <div class="column">
+      <section class="card" aria-labelledby="summary-heading">
+        <h2 id="summary-heading">Summary</h2>
+        <div id="summary" class="kpi-row"></div>
+      </section>
+
+      <section class="card" aria-labelledby="list-heading">
+        <div class="card-head">
+          <h2 id="list-heading">Expenses</h2>
+          <span class="card-sub" data-list-count></span>
+        </div>
+        <div id="expense-list"></div>
+      </section>
+
+      <section class="card" aria-labelledby="report-heading">
+        <div class="card-head">
+          <h2 id="report-heading">Category report</h2>
+          <button id="report-toggle" type="button" class="btn btn-secondary"
+                  aria-expanded="false" aria-controls="report">Show report</button>
+        </div>
+        <p class="card-sub">Loaded only when you open it, as a separate webpack chunk.</p>
+        <div id="report" class="report" hidden></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    <span>Try it:</span>
+    <a href="?force-fallback">Force the fallback</a>
+    <span aria-hidden="true">·</span>
+    <a href="./">Use real feature detection</a>
+  </footer>
+</body>
+</html>

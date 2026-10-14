@@ -1,0 +1,155 @@
+/* Part of the lazy "report" chunk: only downloaded when the report is opened. */
+
+.report-body {
+  position: relative;
+}
+
+.report-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.report-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.report-sub {
+  margin: 2px 0 0;
+  color: var(--ink-2);
+  font-size: 0.875rem;
+}
+
+.bar-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 4px;
+}
+
+.bar-row {
+  display: grid;
+  grid-template-columns: minmax(84px, 7.5rem) minmax(0, 1fr) 3rem;
+  align-items: center;
+  gap: 12px;
+  min-height: 32px; /* hit target taller than the 14px bar */
+  padding: 0 6px;
+  border-radius: 8px;
+  cursor: default;
+}
+
+.bar-row:hover,
+.bar-row:focus-visible {
+  background: var(--surface-2);
+}
+
+.bar-row:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.bar-label {
+  font-size: 0.875rem;
+  overflow-wrap: anywhere;
+}
+
+/* One series, so one hue and no legend: the heading names what is plotted. */
+.bar-track {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  border-left: 1px solid var(--axis); /* shared baseline */
+}
+
+.bar {
+  /* Leave room for the value label at the bar's tip. */
+  width: calc((100% - 5.5rem) * var(--ratio));
+  min-width: 2px;
+  height: 14px;
+  border-radius: 0 4px 4px 0; /* square at the baseline, rounded data end */
+  background: var(--accent);
+  transition: filter 120ms ease;
+}
+
+.bar-row:hover .bar,
+.bar-row:focus-visible .bar {
+  filter: brightness(1.12);
+}
+
+.bar-value {
+  flex: none;
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.bar-share {
+  justify-self: end;
+  color: var(--ink-2);
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.report-tooltip {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  gap: 2px;
+  min-width: 150px;
+  padding: 8px 10px 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: 0 6px 20px rgb(0 0 0 / 0.14);
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, calc(-100% - 6px));
+  transition: opacity 100ms ease;
+}
+
+/* Line key in the series colour; the text stays in ink colours. */
+.report-tooltip::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 10px;
+  width: 2px;
+  height: 14px;
+  border-radius: 1px;
+  background: var(--accent);
+}
+
+.report-tooltip.is-visible {
+  opacity: 1;
+}
+
+.tooltip-value {
+  font-size: 0.9375rem;
+}
+
+.tooltip-label {
+  color: var(--ink-2);
+  font-size: 0.8125rem;
+}
+
+.tooltip-detail {
+  color: var(--ink-2);
+  font-size: 0.75rem;
+}
+
+@media (max-width: 480px) {
+  .report-header {
+    flex-direction: column;
+  }
+
+  .bar-row {
+    grid-template-columns: minmax(70px, 6rem) minmax(0, 1fr) 2.5rem;
+    gap: 8px;
+  }
+}

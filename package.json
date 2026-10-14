@@ -2,7 +2,7 @@
   "name": "fde-q5-webpack-modernizr",
   "version": "1.0.0",
   "private": true,
-  "description": "Monthly Expense Tracker - Front End Design assignment Q5: Webpack bundling, code splitting and production optimisation, with Modernizr detecting <input type=\"month\"> and a lazy-loaded fallback.",
+  "description": "Monthly Expense Tracker - assignment Q5: Webpack bundling, code splitting and production optimisation, with Modernizr detecting <input type=\"month\"> and a lazy-loaded fallback.",
   "scripts": {
     "start": "webpack serve --mode development",
     "build": "webpack --mode production",
